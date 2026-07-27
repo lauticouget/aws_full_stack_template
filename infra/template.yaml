@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+  ClientAppUrl:
+    Type: String
+    Description: 'The allowed origin for CORS'
+
+Conditions:
+  IsProd: !Equals [!Ref Environment, prod]
+
+
+Globals:
+  Function:
+    Runtime: nodejs24.x
+    Architectures:
+      - arm64
+    Timeout: 15
+    MemorySize: 256
+    Environment:
+      Variables:
+        NODE_OPTIONS: --enable-source-maps
+        ENVIRONMENT: !Ref Environment
+        LOG_LEVEL: !If [IsProd, INFO, DEBUG]
+
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: !Sub showcase-users-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: email-index
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+      SSESpecification:
+        SSEEnabled: true
+
+  GraphqlApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Metadata:
+      guard:
+        SuppressedRules:
+          - CLOUDWATCH_LOG_GROUP_ENCRYPTED
+          - CW_LOGGROUP_RETENTION_PERIOD_CHECK
+    Properties:
+      LogGroupName: !Sub /aws/lambda/showcase-api-${Environment}
+      RetentionInDays: !If [IsProd, 90, 14]
+
+
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref ClientAppUrl
+        AllowMethods:
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+        AllowCredentials: true
+
+  GraphqlApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub showcase-api-${Environment}
+      Handler: handler.handler
+      CodeUri: ../dist/apps/api
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
+      Environment:
+        Variables:
+          USERS_TABLE: !Ref UsersTable
+          DYNAMODB_LOCAL_ENDPOINT: ''
+      Events:
+        GraphqlPost:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /graphql
+            Method: POST
+
+
+Outputs:
+  ApiEndpoint:
+    Description: GraphQL API endpoint URL
+    Value: !Sub https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/graphql
+
+  UsersTableName:
+    Description: DynamoDB Users table name
+    Value: !Ref UsersTable

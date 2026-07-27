@@ -1,0 +1,49 @@
+{
+  "name": "@showcase/api",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "typecheck"
+        ],
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "options": {
+          "platform": "node",
+          "outputPath": "dist/apps/api",
+          "format": [
+            "cjs"
+          ],
+          "bundle": true,
+          "thirdParty": true,
+          "main": "apps/api/src/handler.ts",
+          "additionalEntryPoints": [
+            "apps/api/src/postConfirmation.ts"
+          ],
+          "tsConfig": "apps/api/tsconfig.app.json",
+          "assets": [
+            "apps/api/src/assets"
+          ],
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".cjs"
+            }
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@showcase/shared": "workspace:*"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@showcase/web",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "dev": {
+        "executor": "@nx/next:server",
+        "options": {
+          "dev": true,
+          "port": 4200,
+          "buildTarget": "@showcase/web:start"
+        }
+      },
+      "typecheck": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "tsc --noEmit",
+          "cwd": "apps/web"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@showcase/shared": "workspace:*",
+    "@apollo/client": "^4.1.4",
+    "@apollo/client-integration-nextjs": "^0.14.4",
+    "next": "~16.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
