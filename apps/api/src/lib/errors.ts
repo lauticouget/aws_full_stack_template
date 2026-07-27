@@ -18,4 +18,4 @@ export const DynamoErrorName = {
   ConditionalCheckFailed: 'ConditionalCheckFailedException',
 } as const;
 
-export { GraphQLErrorCode } from '@showcase/shared';
+export { GraphQLErrorCode } from '@app/shared';

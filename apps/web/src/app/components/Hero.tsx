@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -17,19 +15,20 @@ export default function Hero() {
             <h1 className="mt-4 text-4xl font-bold leading-tight text-text-primary md:text-5xl lg:text-6xl">
               Hi, I&apos;m{' '}
               <span className="bg-gradient-to-r from-accent-primary to-accent-secondary bg-clip-text text-transparent">
-                Lautaro
+                Your Name
               </span>
             </h1>
 
             <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary md:text-lg">
-              I build modern web applications with TypeScript, React, GraphQL,
-              and AWS. This site is a live showcase of the tools and patterns I
-              use — from CI/CD pipelines to serverless infrastructure.
+              This starter combines TypeScript, React, GraphQL, and AWS
+              serverless infrastructure — from CI/CD pipelines to a
+              full-stack Apollo + DynamoDB backend. Replace this copy with
+              your own introduction.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center md:justify-start">
               <a
-                href="https://www.linkedin.com/in/lautarocouget/"
+                href="https://www.linkedin.com/in/your-profile/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0A66C2] px-6 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -40,7 +39,7 @@ export default function Hero() {
                 LinkedIn
               </a>
               <a
-                href="https://github.com/lauticouget/showcase"
+                href="https://github.com/your-org/your-repo"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-lg border border-border-accent px-6 py-3 text-center text-sm font-semibold text-text-primary transition-colors hover:border-accent-primary hover:text-accent-primary"
@@ -50,17 +49,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Profile picture — centered on mobile, right side on desktop */}
+          {/* Avatar placeholder — centered on mobile, right side on desktop */}
           <div className="order-1 md:order-2 md:flex-shrink-0">
-            <div className="relative h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80">
+            <div className="relative flex h-48 w-48 items-center justify-center md:h-64 md:w-64 lg:h-80 lg:w-80">
               <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-accent-primary via-accent-secondary to-accent-tertiary opacity-50 blur-md" />
-              <Image
-                src="/profile_picture.jpg"
-                alt="Lautaro Couget"
-                fill
-                priority
-                className="relative rounded-full border-2 border-border object-cover"
-              />
+              <div className="relative flex h-full w-full items-center justify-center rounded-full border-2 border-border bg-bg-secondary text-4xl font-bold text-text-primary lg:text-6xl">
+                YN
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 {
-  "name": "@showcase/web",
+  "name": "@app/web",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -9,7 +9,7 @@
         "options": {
           "dev": true,
           "port": 4200,
-          "buildTarget": "@showcase/web:start"
+          "buildTarget": "@app/web:start"
         }
       },
       "typecheck": {
@@ -22,7 +22,7 @@
     }
   },
   "dependencies": {
-    "@showcase/shared": "workspace:*",
+    "@app/shared": "workspace:*",
     "@apollo/client": "^4.1.4",
     "@apollo/client-integration-nextjs": "^0.14.4",
     "next": "~16.0.1",

@@ -84,7 +84,7 @@ Always use `GraphQLErrorCode` and `DynamoErrorName` in resolvers — never hardc
 
 ### Shared Library (libs/shared)
 
-Cross-app constants and types live in `libs/shared` — published as `@showcase/shared`:
+Cross-app constants and types live in `libs/shared` — published as `@app/shared`:
 
 ```
 libs/shared/src/
@@ -92,7 +92,7 @@ libs/shared/src/
   index.ts      # Barrel export
 ```
 
-The package uses a custom `@showcase/source` export condition so TypeScript resolvers (both API and web) import from the `.ts` source directly without a build step. `apps/api/src/lib/errors.ts` re-exports `GraphQLErrorCode` from here.
+The package uses a custom `@app/source` export condition so TypeScript resolvers (both API and web) import from the `.ts` source directly without a build step. `apps/api/src/lib/errors.ts` re-exports `GraphQLErrorCode` from here.
 
 **Adding to the shared library**: add the export to `libs/shared/src/index.ts`, then run `pnpm install` once if adding a new package dependency.
 
@@ -196,7 +196,7 @@ sam deploy --guided
 - **nx.json**: Nx workspace configuration with plugin settings
 - **package.json**: Root dependencies and workspace scripts
 - **apps/api/package.json**: API-specific Nx build targets (esbuild, prune-lockfile, etc.)
-- **libs/shared/package.json**: Shared library with `@showcase/source` export condition
+- **libs/shared/package.json**: Shared library with `@app/source` export condition
 - **codegen.ts**: GraphQL Codegen config (schema → generated types)
 - **infra/template.yaml**: AWS SAM CloudFormation template
 - **infra/env.local.json**: Local env overrides for SAM (gitignored — copy from env.local.json.example)
@@ -208,7 +208,7 @@ sam deploy --guided
 
 ## Local Development Setup
 
-DynamoDB Local runs in Docker on the `showcase-local` network. SAM Lambda containers also attach to this network and reach DynamoDB via `http://dynamodb-local:8000` (not `localhost`).
+DynamoDB Local runs in Docker on the `app-local` network. SAM Lambda containers also attach to this network and reach DynamoDB via `http://dynamodb-local:8000` (not `localhost`).
 
 `pnpm dev:api` runs everything in sequence/parallel:
 1. `dynamo:start` — starts Docker container, waits until healthy, creates tables

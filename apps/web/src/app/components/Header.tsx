@@ -31,7 +31,7 @@ export function Header() {
       <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-sm">
         <div className="mx-auto grid h-14 max-w-5xl grid-cols-[1fr_auto_1fr] items-center px-6">
           <span className="font-mono text-sm font-semibold tracking-widest text-text-secondary uppercase">
-            showcase
+            app
           </span>
 
           <div className="flex justify-center px-6">

@@ -35,7 +35,7 @@ Resources:
     DeletionPolicy: Retain
     UpdateReplacePolicy: Retain
     Properties:
-      TableName: !Sub showcase-users-${Environment}
+      TableName: !Sub app-users-${Environment}
       BillingMode: PAY_PER_REQUEST
       KeySchema:
         - AttributeName: userId
@@ -65,7 +65,7 @@ Resources:
           - CLOUDWATCH_LOG_GROUP_ENCRYPTED
           - CW_LOGGROUP_RETENTION_PERIOD_CHECK
     Properties:
-      LogGroupName: !Sub /aws/lambda/showcase-api-${Environment}
+      LogGroupName: !Sub /aws/lambda/app-api-${Environment}
       RetentionInDays: !If [IsProd, 90, 14]
 
 
@@ -86,7 +86,7 @@ Resources:
   GraphqlApi:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub showcase-api-${Environment}
+      FunctionName: !Sub app-api-${Environment}
       Handler: handler.handler
       CodeUri: ../dist/apps/api
       Policies:

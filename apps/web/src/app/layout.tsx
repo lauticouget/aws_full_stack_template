@@ -4,9 +4,9 @@ import { UserProvider } from '@/lib/context/UserContext';
 import { Header } from './components/Header';
 
 export const metadata = {
-  title: 'Lautaro Couget — Full-Stack Developer',
+  title: 'Your Name — Full-Stack Developer',
   description:
-    'Portfolio showcasing full-stack development with Next.js, GraphQL, and AWS.',
+    'Full-stack starter built with Next.js, GraphQL, and AWS serverless infrastructure.',
 };
 
 export default function RootLayout({

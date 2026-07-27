@@ -5,10 +5,10 @@ region = "us-east-1"
 confirm_changeset = false
 fail_on_empty_changeset = false
 capabilities = "CAPABILITY_IAM"
-stack_name = "showcase-api-dev"
+stack_name = "app-api-dev"
 resolve_s3 = true
-s3_prefix = "showcase-api-dev"
-parameter_overrides = "Environment=dev ClientAppUrl=\"https://develop.dwi87gyskj43z.amplifyapp.com\""
+s3_prefix = "app-api-dev"
+parameter_overrides = "Environment=dev ClientAppUrl=\"https://develop.example.amplifyapp.com\""
 disable_rollback = true
 
 [prod.deploy.parameters]
@@ -16,7 +16,7 @@ region = "us-east-1"
 confirm_changeset = true
 fail_on_empty_changeset = false
 capabilities = "CAPABILITY_IAM"
-stack_name = "showcase-api-prod"
+stack_name = "app-api-prod"
 resolve_s3 = true
-s3_prefix = "showcase-api-prod"
-parameter_overrides = "Environment=prod ClientAppUrl=\"https://main.dwi87gyskj43z.amplifyapp.com\""
+s3_prefix = "app-api-prod"
+parameter_overrides = "Environment=prod ClientAppUrl=\"https://main.example.amplifyapp.com\""

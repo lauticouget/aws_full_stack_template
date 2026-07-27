@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@showcase/shared": ["../../libs/shared/src/index.ts"]
+      "@app/shared": ["../../libs/shared/src/index.ts"]
     },
     "types": ["jest", "node"],
     "outDir": "dist",

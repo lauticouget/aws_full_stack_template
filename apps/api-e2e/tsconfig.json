@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "out-tsc/@showcase/api-e2e",
+    "outDir": "out-tsc/@app/api-e2e",
     "esModuleInterop": true,
     "noUnusedLocals": false,
     "noImplicitAny": false

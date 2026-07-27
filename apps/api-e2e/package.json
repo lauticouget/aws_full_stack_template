@@ -1,10 +1,10 @@
 {
-  "name": "@showcase/api-e2e",
+  "name": "@app/api-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@showcase/api"
+      "@app/api"
     ],
     "targets": {
       "e2e": {
@@ -17,8 +17,8 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@showcase/api:build",
-          "@showcase/api:serve"
+          "@app/api:build",
+          "@app/api:serve"
         ]
       }
     }

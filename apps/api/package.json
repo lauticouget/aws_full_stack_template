@@ -1,5 +1,5 @@
 {
-  "name": "@showcase/api",
+  "name": "@app/api",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -44,6 +44,6 @@
     }
   },
   "dependencies": {
-    "@showcase/shared": "workspace:*"
+    "@app/shared": "workspace:*"
   }
 }

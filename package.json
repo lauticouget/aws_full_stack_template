@@ -1,5 +1,5 @@
 {
-  "name": "@showcase/source",
+  "name": "@app/source",
   "version": "0.0.0",
   "license": "MIT",
   "packageManager": "pnpm@9.7.1",
@@ -12,9 +12,9 @@
     "kill:container": "docker ps -q --filter publish=9229 | xargs -r docker stop || true",
     "dynamo:start": "docker compose -f ./infra/docker-compose.local.yaml up -d --wait && node ./scripts/create-local-table.mjs",
     "dynamo:stop": "docker compose -f ./infra/docker-compose.local.yaml down",
-    "sam": "sam local start-api -t ./infra/template.yaml --warm-containers LAZY --docker-network showcase-local --env-vars ./infra/env.local.json",
-    "sam:inspect": "pnpm kill:container && sam local start-api -t ./infra/template.yaml --warm-containers LAZY --debug-port 9229 --docker-network showcase-local --env-vars ./infra/env.local.json",
-    "sam:inspect:pretty": "pnpm kill:container && sam local start-api -t ./infra/template.yaml --warm-containers LAZY --debug-port 9229 --docker-network showcase-local --env-vars ./infra/env.local.json 2>&1 | node ./scripts/pretty-logs.mjs",
+    "sam": "sam local start-api -t ./infra/template.yaml --warm-containers LAZY --docker-network app-local --env-vars ./infra/env.local.json",
+    "sam:inspect": "pnpm kill:container && sam local start-api -t ./infra/template.yaml --warm-containers LAZY --debug-port 9229 --docker-network app-local --env-vars ./infra/env.local.json",
+    "sam:inspect:pretty": "pnpm kill:container && sam local start-api -t ./infra/template.yaml --warm-containers LAZY --debug-port 9229 --docker-network app-local --env-vars ./infra/env.local.json 2>&1 | node ./scripts/pretty-logs.mjs",
     "dev:api": "pnpm dynamo:start && concurrently --kill-others --names \"BUILD,SAM,TYPES\" -c \"cyan,magenta,yellow\" \"pnpm watch:api\" \"pnpm sam:inspect:pretty\" \"pnpm watch:typecheck\""
   },
   "nx": {},

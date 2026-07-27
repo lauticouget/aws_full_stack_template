@@ -1,10 +1,10 @@
 {
-  "name": "@showcase/shared",
+  "name": "@app/shared",
   "version": "0.0.1",
   "private": true,
   "exports": {
     ".": {
-      "@showcase/source": "./src/index.ts",
+      "@app/source": "./src/index.ts",
       "default": "./src/index.ts"
     }
   }
